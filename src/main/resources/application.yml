@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/paymo_login?createDatabaseIfNotExist=true&autoReconnect=true
+    username: root
+    password: root
+    dbcp2:
+      test-while-idle: true
+      validation-query: SELECT 1
+    initialization-mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  queries:
+    users-query: select email, password, active from user_profile where email=?
+    roles-query: select u.email, r.role from user_profile u join user_role ur on(u.user_profile_id=ur.user_profile_id) inner join role r on(ur.role_id=ur.role_id) where u.email=?
